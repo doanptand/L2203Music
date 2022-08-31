@@ -11,11 +11,9 @@ enum class MediaState {
 object MediaManager {
     //array songs that playing
     private val songs = arrayListOf<Song>()
-    private val mediaPlayer = MediaPlayer()
-
-
-    private var songIndex = 0 //bài hát đang được play
-    private var mediaState = MediaState.STATE_IDLE //quản lí state hiện tại của media
+    val mediaPlayer = MediaPlayer()
+    var songIndex = 0 //bài hát đang được play
+    var mediaState = MediaState.STATE_IDLE //quản lí state hiện tại của media
 
 
     fun setSongs(temp: List<Song>) {

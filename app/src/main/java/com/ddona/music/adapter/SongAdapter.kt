@@ -4,9 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ddona.music.databinding.ItemSongBinding
+import com.ddona.music.media.MediaManager
 import com.ddona.music.model.Song
 
-class SongAdapter(private val songs: List<Song>) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
+class SongAdapter(
+    private val songs: List<Song>,
+    private val callback: OnSongItemClickListener
+) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: ItemSongBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
@@ -24,6 +28,10 @@ class SongAdapter(private val songs: List<Song>) : RecyclerView.Adapter<SongAdap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         songs[position].let {
             holder.bind(it)
+        }
+        holder.itemView.setOnClickListener {
+            MediaManager.setSongs(songs)
+            callback.onClick(position)
         }
     }
 
