@@ -16,6 +16,12 @@ object MediaManager {
     var mediaState = MediaState.STATE_IDLE //quản lí state hiện tại của media
 
 
+    init {
+        mediaPlayer.setOnCompletionListener {
+            nextSong()
+        }
+    }
+
     fun setSongs(temp: List<Song>) {
         songs.clear()
         songs.addAll(temp)
