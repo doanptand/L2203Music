@@ -1,6 +1,7 @@
 package com.ddona.music
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ddona.music.adapter.MusicPagerAdapter
@@ -25,6 +26,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun startMediaService() {
         val intent = Intent(this, MusicService::class.java)
-        startService(intent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent)// sau 5 giây mà không thấy notification 
+        } else {
+            startService(intent)
+        }
     }
 }
