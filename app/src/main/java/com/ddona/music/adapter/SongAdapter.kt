@@ -31,6 +31,7 @@ class SongAdapter(
         }
         holder.itemView.setOnClickListener {
             MediaManager.setSongs(songs)
+            MediaManager.songIndex = position
             callback.onClick(position)
         }
     }

@@ -1,9 +1,6 @@
 package com.ddona.music.fragment
 
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.ServiceConnection
+import android.content.*
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
@@ -12,11 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ddona.music.MainActivity
 import com.ddona.music.adapter.OnSongItemClickListener
 import com.ddona.music.adapter.SongAdapter
 import com.ddona.music.databinding.FragmentSongBinding
 import com.ddona.music.media.MediaLoader
+import com.ddona.music.media.MediaManager
 import com.ddona.music.service.MusicService
+import com.ddona.music.util.Const
 
 class SongFragment : Fragment(), OnSongItemClickListener {
     private lateinit var binding: FragmentSongBinding
@@ -61,6 +61,9 @@ class SongFragment : Fragment(), OnSongItemClickListener {
     }
 
     override fun onClick(index: Int) {
-        musicService.playPauseSong(index)
+//        musicService.playPauseSong(index)
+        val playIntent = Intent(Const.ACT_PLAY_PAUSE)
+        requireContext().sendBroadcast(playIntent)
+        (requireActivity() as MainActivity).updateBottomLayout(true, MediaManager.songs[index])
     }
 }
